@@ -27,7 +27,11 @@
 # 프로젝트 파일 구조 및 설명
 
 ### **app.py, templates, static**
-Flask 서버 및 웹페이지 코드를 포함하고 있습니다. `app.py`는 서버의 백엔드 로직을 처리하고, `templates` 폴더에는 HTML 페이지 템플릿이, `static` 폴더에는 CSS 파일과 JavaScript 파일 저장되어 있습니다.
+Flask 서버 및 웹페이지 코드를 포함하고 있습니다. `app.py`는 서버의 백엔드 로직을 처리하고, `templates` 폴더에는 HTML 페이지 템플릿이, `static` 폴더에는 CSS 파일과 JavaScript 파일 저장되어 있습니다.<br>
+- **page1a, page2a, ...**: 이 페이지들은 특정 표를 보여줍니다.
+
+- **page1, page2, ...**: 이 페이지들은 D3.js를 활용한 인터랙티브 지도를 표시합니다.
+
 
 > **참고**: 객체 인식 후 웹 페이지의 값을 증가시키기 위해, `Cisco project.ipynb`의 ipynb 코드 내에서 엔드포인트 페이지 주소를 변경해야 합니다.
 
