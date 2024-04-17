@@ -1,2 +1,6 @@
 # Econald
-cisco
+cisco project
+
+app.py, templates, static ->> flask server
+
+
