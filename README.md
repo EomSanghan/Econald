@@ -6,6 +6,7 @@
 | 윤제화 | 엄상한 | 이준화 | 정현우 | 이상우 | 윤준혁 |
 |:--------|:--------|:--------|:--------|:--------|:--------|
 
+![Background Image](/econald.png)
 
 ## 기능 개요
 
@@ -17,6 +18,14 @@
 - 시뮬레이션: 하드웨어 설계를 대신할, NX 애니메이션 시퀀스가 실행되면 설계 기기의 각 부품(Cam 및 Stack plate)이 제어되어 입력된 동작을 수행합니다.
 
 ## 기술 스택
+<div style="display: flex;">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+    <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=C++&logoColor=white">
+    <img src="https://img.shields.io/badge/D3.JS-F9A03C?style=for-the-badge&logo=D3.js&logoColor=white">
+    <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
+    <img src="https://img.shields.io/badge/NX-143055?style=for-the-badge&logo=NX&logoColor=white">
+</div>
+
 
 ### Python
 - **YOLOv5**: 실시간 객체 탐지
