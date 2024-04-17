@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    svg {
+        position: absolute;
+        top: 5vh; /* 화면 높이의 1%만큼 위로 */
+        left: -8vw; /* 화면 너비의 23%만큼 오른쪽으로 */
+        width: 90vw /* 자동으로 너비 조정 */
+        height: 90vh;
+    }
+    .image-container a:nth-child(3) .image{
+        width: 15vw; 
+        height: 13vh;
+        margin-top: 30px; 
+    }
+    .image-container a:not(:nth-child(3)) .image {
+        width: 11vw; 
+        height: 9vh; 
+        margin-top: 10px;
+    }
+    .image-container {
+        position: absolute;
+        top: 24vh;
+        left: 4vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    .image {
+        width: 14vw;
+        height: 12vh;
+        margin-top: px;
+    }
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../static/img/background.png');
+        background-size: cover;
+        background-position: centerbottom;
+        z-index: -1; /* 배경 이미지를 화면 뒤로 보냅니다. */
+    }
+path {
+  stroke-linejoin: round;
+}
+
+.land {
+  fill: #49aadd;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+}
+.states:hover {
+	fill: #aef7ff;
+}
+
+.municipality-label {
+  fill: #fff;
+  font-size: 50px;
+  font-weight: 300;
+  text-anchor: middle;
+  font-family: sans-serif;
+}
+.popup {
+    fill: black;
+    font-size: 100px;
+}
+</style>
+<body>
+    <div class="background-image"></div>
+    <div class="image-container">
+        <a href="{{ url_for('another3_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/starbucks.png') }}" alt="Background Image 1">
+        </a>
+        <a href="{{ url_for('another4_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/twosome.png') }}" alt="Second Image">
+        </a>
+        <a href="{{ url_for('another5_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/ediya.png') }}" alt="Second1 Image">
+        </a>
+        <a href="{{ url_for('another6_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/compose.png') }}" alt="Second2 Image">
+        </a>
+        <a href="{{ url_for('another7_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/paik.png') }}" alt="Second3 Image">
+        </a>
+        <a href="{{ url_for('another8_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/mega.png') }}" alt="Second4 Image">
+        </a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/queue.v1.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 2000,
+    height = 1400;
+
+
+var projection = d3.geo.mercator()
+    .center([126.9895, 37.5651])
+    .scale(210000)
+    .translate([width/2, height/2]);
+
+
+
+var path = d3.geo.path().projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .style("display", "block")  // SVG를 블록 요소로 설정하여 가운데 정렬을 쉽게합니다.
+    .style("margin", "auto")
+    .style("margin-top", "10%")
+    .style("margin-left", "40%")
+    .style("background-color", "white");
+
+var tooltip = d3.select("body").append("div")
+    .attr("class","tooltip")
+    .style("opacity",0)
+    .style("width",600);
+
+queue()
+    .defer(d3.json, "../static/seoul_municipalities_topo_simple.json")
+    .await(ready);
+
+function ready(error, seoul) {
+  if (error) throw error;
+  svg.append("path")
+      .datum(topojson.feature(seoul, seoul.objects.seoul_municipalities_geo))
+      .attr("class", "land")
+      .attr("d", path);
+
+  svg.append("path")
+      .datum(topojson.mesh(seoul, seoul.objects.seoul_municipalities_geo, function(a, b) { return a !== b; }))
+      .attr("class", "states")
+      .attr("d", path);
+
+  var features = topojson.feature(seoul, seoul.objects.seoul_municipalities_geo).features;
+
+
+  svg.selectAll('text')
+      .data(features)
+      .enter().append("text")
+      .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .attr("class", "municipality-label")
+      .text(function(d) { return d.properties.SIG_KOR_NM; })
+      .style("fill", "black")
+      .style('font-weight', 'bold');
+
+   /*svg.selectAll('.states')
+        .data(features)
+        .enter()
+        .append('path')
+        .attr('class','states')
+        .attr('d',path)
+        .on('mouseover', function(d, i) {
+            svg.selectAll('.states').style('fill-opacity', null); // 다른 모든 경계선의 투명도 초기화
+            d3.select(this).style('fill-opacity', 0.7); // 현재 경계선에만 투명도 적용
+        }); */
+        
+    svg.selectAll('.municipalities') // 새로운 클래스 '.municipalities'를 선택
+        .data(features)
+        .enter()
+        .append('path')
+        .attr('class', 'municipalities')
+        .attr('d', path)
+        .style('fill', 'rgb(135, 206, 250)')
+        .style('stroke', 'white') // 테두리 색상 설정
+        .style('stroke-width', 5) // 테두리 두께 설정
+        
+        .on('mouseover', function(d, i) {
+                svg.selectAll('.states').style('fill-opacity', null); // 다른 모든 경계선의 투명도 초기화
+                svg.selectAll('.municipalities').style('fill-opacity', null); // 다른 모든 지역 요소의 투명도 초기화
+                d3.select(this).style('fill-opacity', 0.5); // 현재 지역 요소에만 투명도 적용 
+                var municipalityName = d.properties.SIG_KOR_NM; // 해당 지역의 이름
+                var receivedata = d.properties.Data; // 해당 지역의 인구 수 등 원하는 정보 추출
+                var mouseCoords = d3.mouse(this.parentNode);
+
+                var xPosition = mouseCoords[0];
+                var yPosition = mouseCoords[1];
+
+
+// SVG 경계 내에 팝업이 위치하도록 조정
+                var svgWidth = svg.style('width').replace('px', '');
+                var svgHeight = svg.style('height').replace('px', '');
+                var popupWidth = 300;
+                var popupHeight = 300;
+
+                xPosition = xPosition + popupWidth > svgWidth ? svgWidth - popupWidth : xPosition;
+                yPosition = yPosition + popupHeight > svgHeight ? svgHeight - popupHeight : yPosition;
+
+            // 팝업창 생성
+                var popupGroup = svg.append("g")
+                .attr("class", "popup-group")
+                .attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+
+// 팝업창 생성
+                popupGroup.append("rect")
+                .attr("class", "popup")
+                .attr("width", popupWidth)
+                .attr("height", popupHeight)
+                .attr("fill", "black")
+                .attr("opacity", 0.4)
+                .style("pointer-events", "none");
+
+// 팝업창 텍스트 추가 (예시)
+                var popupText = popupGroup.append("text")
+                    .attr("class", "tooltip") // 클래스를 추가하여 선택 가능하도록 함
+                    .attr("y", popupHeight/2) // 텍스트 위치 조정
+                    .attr("fill", "white") // 텍스트 색상
+                    .attr("font-size", "50px") ;
+
+                popupText.append("tspan")
+                    .attr("x", popupWidth / 8)
+                    .attr("dy", "-0.5em") // 첫 번째 줄의 상대적 위치 조정
+                    .text("회수량:");
+                
+                // 두 번째 줄의 텍스트
+                popupText.append("tspan")
+                    .attr("x", popupWidth / 8)
+                    .attr("dy", "1.8em") // 첫 번째 줄 대비 두 번째 줄의 상대적 위치 조정
+                    .text(receivedata);
+        })
+        .on('mouseout', function(d, i) {
+            // 마우스를 떼었을 때의 동작 설정
+                svg.selectAll('.municipalities').style('fill-opacity', null);
+                d3.select(this).style('fill', 'rgb(135, 206, 250)'); // 원래의 색상으로 변경
+                svg.selectAll('.popup-group').remove();
+        });
+
+    svg.selectAll('.municipality-label') // .municipality-label 클래스 선택
+        .data(features)
+        .enter().append("text")
+        .attr("transform", function(d) { 
+            if (d.properties.SIG_KOR_NM == "양천구") {
+                // 특정 지역의 위치를 변경합니다.
+                return "translate(" + d3.geocentroid(d)[0] + "," + (d3.geocentroid(d)[1] +50) + ")"; 
+            } else {
+                return "translate(" + d3.geocentroid(d) + ")"; 
+            }
+        })
+        .attr("dy", ".35em")
+        .attr("class", "municipality-label")
+        .text(function(d) { return d.properties.SIG_KOR_NM; });
+
+
+    
+        
+}
+
+</script>
+</body>
+</html>
