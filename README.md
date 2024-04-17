@@ -1,18 +1,43 @@
-# Econald
 
-## cisco project
+# Econald's
 
-### **app.py, templates, static ->> flask server, webpage code** <br>
-(In order to perform raising the value of a web page after object recognition, the endpoint page address must be changed in the code of cisco project.ipyb.)
+## 기능 개요
 
+- 이미지 처리 및 객체 탐지: YOLOv5를 사용하여 이미지 내 객체를 식별 분류
+- 웹 서버 및 API: Flask를 사용하여 YOLOv5로 처리된 결과를 서비스하는 REST API를 구축
+- 모터 제어: C++을 사용하여 스텝 모터를 제어
+- 데이터 시각화: JavaScript와 D3.js를 활용하여 맵 기반의 상호 작용적인 데이터 시각화를 구현
+- 웹 페이지 인터페이스: HTML과 CSS를 사용하여 사용자 인터페이스를 구성
 
+## 기술 스택
 
+### Python
+- **YOLOv5**: 실시간 객체 탐지
+- **Flask**: 웹 애플리케이션 프레임워크
 
-### **cisco project.ipyb ->> object dectect code** <br>
+### C++
+- **스텝 모터 제어**: ISR을 호출하여, 파이썬에서 보낸 값만큼 모터를 제어.
 
-(If you want to run it, you can annotate things related to NX and Arudino serial.)
+### JavaScript
+- **D3.js**: JavaScript 라이브러리를 통해 지도 시각화.
 
+### HTML/CSS
+- **웹 페이지 레이아웃**: 프로젝트의 프론트엔드 인터페이스.<br>
 
+# 프로젝트 파일 구조 및 설명
 
-### **step_motor2.ino ->> step motor code** <br>
+### **app.py, templates, static**
+Flask 서버 및 웹페이지 코드를 포함하고 있습니다. `app.py`는 서버의 백엔드 로직을 처리하고, `templates` 폴더에는 HTML 페이지 템플릿이, `static` 폴더에는 CSS 파일과 JavaScript 파일 저장되어 있습니다.
+
+> **참고**: 객체 인식 후 웹 페이지의 값을 증가시키기 위해, `Cisco project.ipynb`의 ipynb 코드 내에서 엔드포인트 페이지 주소를 변경해야 합니다.
+
+### **cisco project.ipynb**
+yolov5를 이용한 객체 탐지 코드가 포함되어 있습니다. <br>
+
+> **참고**: 실행하시려면, NX와 Arduino 시리얼에 관련된 코드를 주석을 추가처리하거나 제거함으로써 실행이 가능합니다.
+
+### **step_motor2.ino**
+이 파일은 스텝 모터 제어를 위한 C++ 코드입니다. 
+
+---
 
