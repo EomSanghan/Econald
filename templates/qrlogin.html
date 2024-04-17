@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QRLOGIN</title>
+<style>
+  .flash-message {
+        color: red;
+        margin: 10px 0;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 50px;
+    background-image: url(''); 
+    background-size: cover; 
+    background-blur: 5px;
+    background-attachment: fixed;
+  }
+  .background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../static/img/background.png');
+    background-size: cover;
+    background-position: centerbottom;
+    z-index: -1; 
+  }
+  h1 {
+    position: relative; 
+    top: 20vh;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    text-decoration: none;
+  }
+
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
+
+  .box1 {
+    margin: 10vw;
+    padding: 10vh;
+    border: solid 2px #199fc4;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* 모바일 화면에 대한 스타일 */
+  @media (max-width: 768px) {
+    body {
+      padding: 20px;
+    }
+    .button {
+      font-size: 20px;
+      padding: 8px 16px;
+    }
+    .box1 {
+      padding: 1em;
+      margin-top : 30vh;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 80%;
+      padding: 2vw;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .flash-message {
+        color: red;
+        margin: 10px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Econald's</h1>
+  <div class="background-image"></div>
+  <div class="box1">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form action="/login" method="post">
+        <input type="text" name="username" placeholder="아이디">
+        <br>
+        <input type="password" name="password" placeholder="비밀번호">
+        <br>
+        <button type="submit" class="button">로그인</button>
+      </form>
+  </div>
+</body>
+</html>

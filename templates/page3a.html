@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .layout-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    
+    table {
+        position: absolute;
+        top: 6.5vh; 
+        left: 22vw; 
+        width: 65vw; 
+        height: 10vh;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        white-space: nowrap;
+        border: 0.4vw solid WHITE; 
+        padding: 1.1vw; 
+        text-align: center;
+        color: white;
+        font-family: "Arial", sans-serif;
+        font-size: calc(2.3vw); 
+
+    }
+    
+    .image-container {
+        position: absolute;
+        top: 22vh; 
+        left: 4vw; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .image-container a:nth-child(3) .image {
+        width: 15vw; 
+        height: 11vh;
+        margin-top: 1vh;
+    }
+    
+    .image-container a:not(:nth-child(3)) .image {
+        width: 11vw; 
+        height: 11vh;
+        margin-top: 1vh; 
+    }
+    
+    .image {
+        width: 23vw; 
+        height: auto;
+        margin-top: 3vh;
+    }
+    
+    .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('../static/img/background.png');
+        background-size: cover;
+        background-position: centerbottom;
+        z-index: -1; 
+    }
+    .highlight, .highlight2 {
+        font-weight: bold;
+    }
+    
+    .highlight {
+        color: red;
+    }
+    
+    .highlight2 {
+        color: green;
+    }
+    
+    </style>
+
+</style>
+<body>
+    <div class="background-image"></div>
+    <div class="layout-container">
+    <div class="image-container">
+        <a href="{{ url_for('another_region1_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/강남구.png') }}" alt="Background Image 1">
+        </a>
+        <a href="{{ url_for('another_region2_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/송파구.png') }}" alt="Second Image">
+        </a>
+        <a href="{{ url_for('another_region3_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/강서구.png') }}" alt="Second1 Image">
+        </a>
+        <a href="{{ url_for('another_region4_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/양천구.png') }}" alt="Second2 Image">
+        </a>
+        <a href="{{ url_for('another_region5_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/노원구.png') }}" alt="Second3 Image">
+        </a>
+        <a href="{{ url_for('another_region6_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/관악구.png') }}" alt="Second4 Image">
+        </a>
+
+        <table id="table">
+            <tr>
+                <th></th>
+                <th>강서-1</th>
+                <th>강서-2</th>
+                <th>강서-3</th>
+                <th>강서-4</th>
+                <th>강서-5</th>
+            </tr>
+            <!-- 데이터 행 -->
+            <tr>
+                <td>STARBUCKS</td>
+                <td>62</td>
+                <td>77</td>
+                <td>23</td>
+                <td>40</td>
+                <td>84</td>
+            </tr>
+            <tr>
+                <td>Twosome</td>
+                <td>72</td>
+                <td>43</td>
+                <td>65</td>
+                <td>44</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td>EDIYA</td>
+                <td>53</td>
+                <td>65</td>
+                <td>24</td>
+                <td>35</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>COMPOSE</td>
+                <td>72</td>
+                <td>43</td>
+                <td>12</td>
+                <td>23</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>PAIK</td>
+                <td>52</td>
+                <td>51</td>
+                <td>23</td>
+                <td>19</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>MEGA</td>
+                <td>62</td>
+                <td>34</td>
+                <td>11</td>
+                <td>23</td>
+                <td>23</td>
+            </tr>
+        </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+<script>
+    
+    const table = document.getElementById('table');
+    const rows = table.getElementsByTagName('tr');
+
+   
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+
+       
+        for (let j = 1; j < cells.length; j++) {
+            const cellValue = parseInt(cells[j].textContent); 
+
+            if (cellValue >= 70) {
+                cells[j].classList.add('highlight'); 
+            }
+            if (cellValue <= 20) {
+                cells[j].classList.add('highlight2'); 
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Button Click</title>
+    <style>
+        /* 버튼을 화면 중앙에 배치하는 스타일 */
+        .center {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 버튼 크기와 스타일 설정 */
+        .button {
+            width: 350px;
+            height: 300px;
+            font-size: 100px;
+            background-color: white; /* 파란색 배경 */
+            color: #003ea8; /* 흰색 텍스트 */
+            border: none; /* 테두리 없음 */
+            cursor: pointer; /* 포인터 커서 */
+            border-radius: 10px; /* 네모 모양 버튼 */
+            margin-right: 150px;
+        }
+
+        .bottom-center {
+            position: fixed;
+            left: 49%;
+            bottom: 100px;
+            transform: translateX(-50%);
+        }
+        body {
+            height: 100vh;
+            background-image: url('../static/img/background.png'); /* 배경 이미지 파일 경로 */
+            background-size: cover; /* 화면에 꽉 차도록 배경 이미지 크기 조절 */
+            background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
+        }
+    </style>
+    <script>
+        function goToPage1() {
+            // 페이지 1로 이동
+            window.location.href = "page2.html";
+        }
+
+        function goToPage2() {
+            // 페이지 2로 이동
+            window.location.href = "page1.html";
+        }
+    </script>
+</head>
+<body>
+    <!-- 페이지 중앙에 버튼 배치 -->
+    <div class="center">
+        <button class="button" onclick="goToPage1()">브랜드</button>
+        <button class="button" onclick="goToPage2()">회수자</button>
+    </div>
+
+</body>
+</html>

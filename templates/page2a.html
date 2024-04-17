@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .layout-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    
+    table {
+        position: absolute;
+        top: 6.5vh; /* 화면 높이의 1%만큼 위로 */
+        left: 22vw; /* 화면 너비의 23%만큼 오른쪽으로 */
+        width: 65vw; /* 자동으로 너비 조정 */
+        height: 10vh;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        white-space: nowrap;
+        border: 0.4vw solid WHITE; /* 경계선 두께를 화면 너비에 비례하게 조정 */
+        padding: 1.1vw; /* 패딩을 화면 너비에 비례하게 조정 */
+        text-align: center;
+        color: white;
+        font-family: "Arial", sans-serif;
+        font-size: calc(2.3vw); /* 폰트 크기를 화면 너비의 5%로 조정 */
+
+    }
+    
+    .image-container {
+        position: absolute;
+        top: 22vh; /* 화면 높이의 28%만큼 위로 */
+        left: 4vw; /* 화면 너비의 5%만큼 오른쪽으로 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .image-container a:nth-child(2) .image {
+        width: 15vw; /* 화면 너비의 30% */
+        height: 11vh;
+        margin-top: 1vh; /* 화면 높이의 3% */
+    }
+    
+    .image-container a:not(:nth-child(2)) .image {
+        width: 11vw; /* 화면 너비의 20% */
+        height: 11vh;
+        margin-top: 1vh; /* 화면 높이의 1% */
+    }
+    
+    .image {
+        width: 23vw; /* 화면 너비의 30% */
+        height: auto;
+        margin-top: 3vh; /* 화면 높이의 % */
+    }
+    
+    .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('../static/img/background.png');
+        background-size: cover;
+        background-position: centerbottom;
+        z-index: -1; /* 배경 이미지를 화면 뒤로 보냅니다. */
+    }
+    .highlight, .highlight2 {
+        font-weight: bold;
+    }
+    
+    .highlight {
+        color: red;
+    }
+    
+    .highlight2 {
+        color: green;
+    }
+    
+    </style>
+
+</style>
+<body>
+    <div class="background-image"></div>
+    <div class="layout-container">
+    <div class="image-container">
+        <a href="{{ url_for('another_region1_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/강남구.png') }}" alt="Background Image 1">
+        </a>
+        <a href="{{ url_for('another_region2_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/송파구.png') }}" alt="Second Image">
+        </a>
+        <a href="{{ url_for('another_region3_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/강서구.png') }}" alt="Second1 Image">
+        </a>
+        <a href="{{ url_for('another_region4_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/양천구.png') }}" alt="Second2 Image">
+        </a>
+        <a href="{{ url_for('another_region5_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/노원구.png') }}" alt="Second3 Image">
+        </a>
+        <a href="{{ url_for('another_region6_page') }}">
+            <img class="image" src="{{ url_for('static', filename='img/관악구.png') }}" alt="Second4 Image">
+        </a>
+
+        <table id="table">
+            <tr>
+                <th></th>
+                <th>송파-1</th>
+                <th>송파-2</th>
+                <th>송파-3</th>
+                <th>송파-4</th>
+                <th>송파-5</th>
+            </tr>
+            <!-- 데이터 행 -->
+            <tr>
+                <td>STARBUCKS</td>
+                <td>52</td>
+                <td>78</td>
+                <td>43</td>
+                <td>60</td>
+                <td>34</td>
+            </tr>
+            <tr>
+                <td>Twosome</td>
+                <td>32</td>
+                <td>23</td>
+                <td>25</td>
+                <td>80</td>
+                <td>64</td>
+            </tr>
+            <tr>
+                <td>EDIYA</td>
+                <td>23</td>
+                <td>45</td>
+                <td>34</td>
+                <td>35</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>COMPOSE</td>
+                <td>32</td>
+                <td>23</td>
+                <td>12</td>
+                <td>23</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>PAIK</td>
+                <td>52</td>
+                <td>91</td>
+                <td>23</td>
+                <td>19</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>MEGA</td>
+                <td>62</td>
+                <td>34</td>
+                <td>11</td>
+                <td>23</td>
+                <td>23</td>
+            </tr>
+        </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+<script>
+    const table = document.getElementById('table');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+
+        
+        for (let j = 1; j < cells.length; j++) {
+            const cellValue = parseInt(cells[j].textContent); 
+
+            
+            if (cellValue >= 70) {
+                cells[j].classList.add('highlight'); 
+            }
+            if (cellValue <= 20) {
+                cells[j].classList.add('highlight2'); 
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
