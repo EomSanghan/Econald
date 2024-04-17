@@ -15,7 +15,7 @@
 - 모터 제어: C++을 사용하여 스텝 모터를 제어
 - 데이터 시각화: JavaScript와 D3.js를 활용하여 맵 기반의 상호 작용적인 데이터 시각화를 구현
 - 웹 페이지 인터페이스: HTML과 CSS를 사용하여 사용자 인터페이스를 구성
-- 시뮬레이션: 하드웨어 설계를 대신할, NX 애니메이션 시퀀스가 실행되면 설계 기기의 각 부품(Cam 및 Stack plate)이 제어되어 입력된 동작을 수행합니다.
+- 시뮬레이션: 하드웨어 설계를 대신할, NX Assembly Sequency가 실행되면 설계 기기의 각 부품(Cam 및 Stack plate)이 제어되어 입력된 동작을 수행합니다.
 
 ## 기술 스택
 <div style="display: flex;">
@@ -41,7 +41,7 @@
 - **웹 페이지 레이아웃**: 프로젝트의 프론트엔드 인터페이스.
 
 ### NX
-- **NX Program Animation Sequency**: 객체 탐지 후 브랜드가 인식되면, 해당 브랜드에 해당하는 NX program 내의 animation sequency가 실행됩니다.
+- **NX Program Assembly Sequency**: 객체 탐지 후 브랜드가 인식되면, 해당 브랜드에 해당하는 NX program 내의 animation sequency가 실행됩니다.
 
 
 
